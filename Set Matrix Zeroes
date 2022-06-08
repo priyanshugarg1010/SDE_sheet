@@ -1,0 +1,81 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        /*-------------BRUTE FORCE APPROACH-----------------T.C =O(M*N*(M+N))    S.C=O(MN)*/
+//       int n = matrix.size();
+//         int m = matrix[0].size();
+//         int tmp[n][m];
+        
+//         for(int i = 0; i< n; i++)
+//             for(int j = 0 ; j < m ; j++)
+//                 tmp[i][j] = 1;
+        
+//         for(int i = 0; i < n ; i++){
+//             for(int j = 0 ; j < m ; j++){
+//                 if(matrix[i][j] == 0){
+//                     for(int k = 0; k < n ;k++)
+//                         tmp[k][j] = 0;
+//                     for(int  k = 0; k < m; k++)
+//                         tmp[i][k]= 0;
+//                 }
+//             }
+//         }
+//         for(int i = 0; i< n; i++)
+//             for(int j = 0 ; j < m ; j++){
+//                 if(tmp[i][j ] == 0) matrix[i][j] = tmp[i][j];
+//                 else matrix[i][j] = matrix[i][j];
+//             }
+        
+        /*-----------OPTIMAL APPROACH MAKE DUMMY ROW AND COLUMN---------  time complexity   = O(N*M)
+
+Space Complexity: O(M + N)*/
+     
+//         int n = matrix.size();
+//         int m = matrix[0].size();
+//         int row[n];
+//         int col[m];
+//         for(int i = 0; i < n; i++)
+//             row[i] = false;
+//         for(int i = 0; i < m ; i++)
+//             col[i] = false;
+        
+        
+//         for(int i = 0; i < n; i++){
+//             for(int j = 0; j < m; j++){
+//                 if(matrix[i][j] == 0){ 
+//                     row[i] = true;
+//                     col[j]= true;
+//                 }
+//             }
+//         }
+        
+//          for(int i = 0; i < n; i++)
+//             for(int j = 0; j < m; j++)
+//                 if(row[i]== true || col[j]==true)
+//                     matrix[i][j]= 0;
+        
+        /*--------------------- PRO -OPTIMAL APPROACH----------------------- time complexity   = O(N*M) Space Complexity: O(1)
+        */
+        
+        int col0 = 1;
+        int row = matrix.size();
+        int col = matrix[0].size();
+        for(int i = 0 ;i < row; i++){
+            if(matrix[i][0]== 0) col0 = 0;
+            
+            for(int j = 1 ; j < col; j++){
+                if(matrix[i][j] == 0) 
+                    matrix[i][0] = matrix[0][j] = 0;
+            }
+        }
+        
+        for(int i = row-1; i >= 0; i--){
+            for(int j= col-1; j >= 1; j--){
+                if(matrix[i][0] == 0 || matrix[0][j]== 0) 
+                    matrix[i][j] = 0;
+                }
+            if(col0 == 0 ) matrix[i][0] = 0;
+        }
+   
+    }
+};

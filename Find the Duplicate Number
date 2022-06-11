@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+         /*---------using map---------*/
+        
+//         unordered_map<int , int> check;
+//         for(int n : nums){
+//             check[n]++;
+//         }
+//         for(int n : nums){
+//             if(check[n] > 1) return n;
+//         }
+//         return 0;
+       
+        
+        /*----------------sorting  -------------
+        Time Complexity:O(nlogn+n)
+            Space Complexity: O(logn)
+        */
+        
+        //   sort(nums.begin(), nums.end());
+        // for(int i = 1; i < nums.size(); i++){
+        //     if(nums[i] == nums[i - 1]) return nums[i];
+        // }
+        // return 0;
+        
+        //negative marking
+        
+//         int duplicate = -1;
+//         for (int i = 0; i < nums.size(); i++){
+//             int cur = abs(nums[i]);
+//             if(nums[cur]  < 0) {
+//                 duplicate = cur;
+//                 break;
+//             }
+//             nums[cur] *= -1;
+            
+//         }
+//        for (auto& num : nums)
+//             num = abs(num);
+//         return duplicate;
+        
+        
+//           /*------------ array as hash map------------
+        o(n)with o(1)*/
+        
+        while(nums[0] != nums[nums[0]])
+            swap(nums[0], nums[nums[0]]);
+        return nums[0];
+        
+    }
+};

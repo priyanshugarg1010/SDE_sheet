@@ -1,0 +1,79 @@
+#include <bits/stdc++.h> 
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+    /*<--------------brute force code ----------->*/
+//     vector<int> ans(n+1, 0);
+//     pair<int,int> result;
+//     for(int i = 0; i < n; i++){
+//         ans[arr[i]]++;
+        
+//     }
+//     for(int i = 0 ;i < n ; i++){
+//         if(ans[i] == 0) 
+//             result.first = (i);
+//         if (ans[i] > 1)
+//             result.second = (i);
+        
+//     }
+//     return result;
+    
+    
+    
+    
+    
+//     /*<-----------using math--------------->*/
+//        long long s = (n*(n+1))/2;
+//     long long p =  (n*(n+1)*(2*n+1))/6;
+//     int missing = 0, repeat = 0;
+    
+//     for(int i = 0; i < n; i++){
+//         s -= (long long )(arr[i]);
+//         p -= (long long)(arr[i])*(arr[i]);
+        
+//     }
+//     missing = (s + p/s)/2;
+//     repeat = missing-s;
+    
+//     pair<int,int> ans;
+//     ans.first = missing;
+//     ans.second = repeat;
+    
+//     return ans;
+    
+    
+    
+    /*<--------------xor method------------------>
+    time complexity = o(n)
+        space complexity = o(1)*/
+	// Write your code here 
+
+     int x = 0; 
+    int y = 0; 
+    int xor1  = arr[0];
+    int setbit ; 
+
+    
+    for(int i = 1; i < n; i++)
+        xor1 ^= arr[i];
+    
+    for(int i = 1; i<= n ; i++)
+        xor1 ^= i;
+    
+    setbit = xor1 & ~(xor1-1);
+    
+    for(int i = 0; i < n;  i++){
+        if(setbit & arr[i]) x = arr[i] ^ x;
+        else y = arr[i] ^ y;
+        }
+    
+    for(int i = 0; i <= n;  i++){
+        if(setbit & i) x = i ^ x;
+        else y = i ^ y;
+        }
+    int count = 0;
+    for(int j = 0 ; j < n ; j++)
+        if(arr[j] == x) count++;
+    if(count != 0) return {y,x};
+    else return {x,y};
+}

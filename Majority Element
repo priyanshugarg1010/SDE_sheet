@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+          
+        /*<--------------brute force ---------------->
+        Time Complexity: O(N^2)
+
+Space Complexity: O(1)*/
+        
+//         int n = nums.size();
+//         for(int i = 0; i < n; i++){
+//             int count = 0;
+//             for(int j = 0 ; j < n; j++)
+//                 if(nums[j] == nums[i]) count++;
+//             if(count > n/2) return nums[i];
+//         }
+//         return 0;
+        
+        
+        
+        /*<--------------better approach ----------->
+        Time Complexity: O(N)
+
+Space Complexity: O(1)
+*/
+        // int count = 0;
+        // int element = 0;
+        // for(int value : nums){
+        //     if (count  == 0) element = value;
+        //     if (value == element) count++;
+        //     else count--;
+        // }
+        // return element;
+        
+      /*<----------------using unordered map---------------->
+      Time Complexity: O(N)
+
+Space Complexity: O(n)*/
+        
+        // unordered_map<int, int > mp;
+        // for(auto value : nums)
+        //     if(++mp[value] > nums.size()/ 2) return value;
+        // return 0;
+            
+          /*<----------------nth element---------------->
+      Time Complexity: O(N)
+
+Space Complexity: O(1)*/
+        
+        nth_element(nums.begin(), nums.begin() + nums.size()/2, nums.end());
+        return nums[nums.size()/2];
+    }
+}; 
